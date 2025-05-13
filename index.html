@@ -1,12 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
 </head>
+
+<!-- decidi crear un login, por que en lo personal me gusto la idea y quite el parrafo tags.
+ esta compuesto por css, html y javascript utilizando el DOM para invocar sus IDs para manipularlos y un simple if para ingresar el usuario o caso contrario negarle negarle -->
+
+<style>
+    /* Contenedor principal del formulario */
+    .outter-container {
+        background-color: aliceblue;
+        /* color de fondo */
+        display: flex;
+        /* utiliza el display flex */
+        justify-content: center;
+        /* centra horizontal */
+        align-items: center;
+        /* centra vertical */
+        flex-direction: column;
+        /* organiza en columna */
+        padding: 20px;
+        /* espacios internos 20 px */
+        width: 300px;
+        /* ancho 300 pixeles */
+        margin: 50px auto;
+        /* espacio externo */
+    }
+
+    /* Margen entre cada elemento interno del formulario */
+    .outter-container div {
+        margin: 10px 0;
+        /* espacio externo */
+    }
+
+    /* Estilo del mensaje de resultado (éxito o error) */
+    #message {
+        margin-top: 15px;
+        /* espacio externo siperior */
+        font-weight: bold;
+        /* esto affecta la letra a bold */
+    }
+
+    /* Manipular el titulo */
+    .titulo {
+        display: flex; /* utiliza el display flex */
+        justify-content: center; /* centra horizontal */
+        height: 5vh; /* se toma distancia de la altura viewport height */ 
+    }
+</style>
+
 <body>
-    <h1>hola Mundo</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil provident dolorum aut reiciendis facilis reprehenderit corrupti commodi excepturi, dolore optio. <br> Maxime ipsa ex, dignissimos voluptates voluptatum ab iusto eligendi minima.</p>
+    <!-- Título de la página -->
+    <div class="titulo">
+        <h1>Login</h1>
+    </div>
+
+    <!-- Formulario de login con id "loginForm" -->
+    <form class="outter-container" id="loginForm">
+        <!-- Etiqueta para el campo de usuario -->
+        <div>
+            <label for="username">User</label>
+        </div>
+        <!-- Campo de entrada de texto para el usuario -->
+        <div>
+            <input type="text" id="username" name="username" />
+        </div>
+
+        <!-- Etiqueta para el campo de contraseña -->
+        <div>
+            <label for="password">Password</label>
+        </div>
+        <!-- Campo de entrada de tipo password -->
+        <div>
+            <input type="password" id="password" name="password" />
+        </div>
+
+        <!-- Botón para enviar el formulario -->
+        <div>
+            <button type="submit" id="button">Submit</button>
+        </div>
+
+        <!-- Elemento donde se mostrará el mensaje de validación -->
+        <div id="message"></div>
+    </form>
+
+    <script>
+        // Obtener el formulario por su ID
+        const loginForm = document.getElementById("loginForm");
+
+        // ⚠️ ERROR: aquí estás buscando un elemento con ID "user", pero no existe.
+        // En su lugar, debes usar "username", que es el ID correcto.
+        // const user = document.getElementById("user"); ❌
+        // Línea corregida: (o simplemente elimínala ya que no la usas)
+        // const username = document.getElementById("username");
+
+        // Obtener los campos de entrada por su ID
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const message = document.getElementById("message");
+
+        // Agregar un listener al evento de "submit" del formulario
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita que el formulario se envíe y recargue la página
+
+            const userName = username.value; // Obtiene el valor ingresado en el campo de usuario
+            const userPassword = password.value; // Obtiene el valor de la contraseña
+
+            // Compara si las credenciales coinciden con los valores definidos
+            if (userName === "alex" && userPassword === "123") {
+                // Si son correctas, muestra mensaje en verde
+                message.textContent = "✅ Login successful!";
+                message.style.color = "green";
+            } else {
+                // Si son incorrectas, muestra mensaje en rojo
+                message.textContent = "❌ Wrong username or password.";
+                message.style.color = "red";
+            }
+        });
+    </script>
 </body>
+
 </html>
